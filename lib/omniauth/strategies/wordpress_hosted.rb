@@ -40,6 +40,14 @@ module OmniAuth
                        }
         ).parsed
       end
+
+    protected
+
+      def build_access_token
+        verifier = request.params["code"]
+        client.auth_code.get_token(verifier)
+        #client.auth_code.get_token(verifier, {:redirect_uri => callback_url}.merge(token_params.to_hash(:symbolize_keys => true)), deep_symbolize(options.auth_token_params))
+      end
     end
   end
 end
